@@ -1,0 +1,105 @@
+.container{
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.content{
+    min-width: 320px;
+    max-width: 350px;
+    width: 100vh;
+    max-height: 740px;
+    height: calc(100vh - 20px);
+    border-radius: 30px;
+    background-image: linear-gradient(45deg,rgb(238, 198, 209),rgba(251, 220, 229,0.4));
+    position: relative;
+    overflow: auto;
+}
+.content::-webkit-scrollbar { 
+    display: none; 
+}
+.header{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    font-size: 18px;
+    font-weight: 500;
+    padding: 75px 30px 50px;
+}
+.header i{
+    width: 22px;
+    opacity: 0.6;
+}
+.playlist-body{
+    padding: 0 30px 70px;
+    max-height: 530px;
+    overflow: auto;
+}
+.playlist-body::-webkit-scrollbar { 
+    display: none; 
+}
+.song-item{
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px;
+    cursor: pointer;
+}
+.info p:first-child,.footer p:first-child{
+    font-size: 18px;
+    font-weight: 600;
+    padding-bottom: 5px;
+}
+.info p:last-child,.footer p:last-child{
+    font-size: 16px;
+    opacity: 0.9;
+}
+.song-time span{
+    font-size: 14px;
+    opacity: 0.6;
+    font-weight: 500;
+}
+.song-item:active{
+    opacity: 0.6;
+}
+.footer{
+    width: 100%;
+    height: 100px;
+    position: absolute;
+    bottom: 0px;
+    left: 0;
+    right: 0;
+    background-color: rgba(252, 229, 234);
+    border-radius: 30px;
+    padding: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.footer span{
+    background-color: #EFA1B4;
+    padding: 25px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    cursor: pointer;
+}
+.hiden{
+    display: none;
+}
+
+.footer span:first-of-type{
+    display:none;
+}
+.footer span:last-child{
+    display:inline-block;
+}
+.player.playing span:last-of-type {
+    display: none;
+}
+.player.playing span:first-of-type {
+    display: inline-block;
+  }
