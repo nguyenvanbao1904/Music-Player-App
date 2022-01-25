@@ -10,12 +10,13 @@
     width: 100vh;
     max-height: 740px;
     height: calc(100vh - 50px);
-    border-radius: 30px;
+    border-radius: 40px;
     background-image: linear-gradient(45deg,rgb(238, 198, 209),rgba(251, 220, 229,0.4));
     position: relative;
     overflow: hidden;
 }
-.header{
+.header,
+.music-player-header{
     width: 100%;
     display: flex;
     justify-content: space-between;
@@ -23,7 +24,8 @@
     font-weight: 500;
     padding: 75px 30px 50px;
 }
-.header i{
+.header i,
+.music-player-header i{
     width: 22px;
     opacity: 0.6;
 }
@@ -43,12 +45,14 @@
     padding: 12px;
     cursor: pointer;
 }
-.info p:first-child,.footer p:first-child{
+.info p:first-child,.footer p:first-child,
+.music-player-name{
     font-size: 18px;
     font-weight: 600;
     padding-bottom: 5px;
 }
-.info p:last-child,.footer p:last-child{
+.info p:last-child,.footer p:last-child,
+.music-player-singer{
     font-size: 16px;
     opacity: 0.9;
 }
@@ -68,7 +72,7 @@
     position: fixed;
     bottom: 24px;
     background-color: rgba(252, 229, 234);
-    border-radius: 30px;
+    border-radius: 40px;
     padding: 25px;
     display: flex;
     align-items: center;
@@ -88,21 +92,137 @@
     display: none;
 }
 
-.footer span:first-of-type{
+.footer span:first-of-type,
+.play-or-pause span:first-of-type{
     display:none;
 }
-.footer span:last-child{
+.footer span:last-child,
+.play-or-pause span:last-child{
     display:inline-block;
 }
-.player.playing span:last-of-type {
+.player.playing span:last-of-type,
+.play-or-pause.playing span:last-of-type{
     display: none;
 }
-.player.playing span:first-of-type {
+.player.playing span:first-of-type,
+.play-or-pause.playing span:first-of-type {
     display: inline-block;
-  }
-  @media (min-height: 1023px){
+}
+@media (min-height: 1023px){
     .footer{
         position: absolute;
         bottom: 0px;
     }
-  }
+}
+.music-player-container{
+    position: absolute;
+    inset: 0;
+    background-color: #FFEFF2;
+    transform: translateX(100%);
+    opacity: 0;
+    transition: 0.3s linear;
+}
+.show{
+    opacity: 1;
+    transform: translateX(0);
+}
+.music-player-header{
+    padding-bottom: 40px;
+}
+.music-player-body{
+    padding: 0 30px;
+    background-color: rgba(255, 255, 255,0.8);
+    margin-top: 150px;
+    border-radius: 40px;
+}
+.music-player-body img {
+    border-radius: 50%;
+    margin-top: -50%;
+    box-shadow: 10px 40px 20px rgb(251 220 229 / 70%);
+    height: 200px;
+    width: 200px;
+}
+.music-player-function{
+    padding-top: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.music-player-info{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.music-player-name{
+    font-size: 22px;
+}
+.music-player-function i {
+    font-size: 20px;
+    opacity: 0.6;
+    margin-top: 10px;
+}
+.music-player-singer{
+    font-weight: 500;
+    opacity: 0.7;
+}
+.icon-heart.active{
+    color: red;
+}
+.playing-time{
+    display: flex;
+    justify-content: space-between;
+    padding-top: 24px;
+}
+.playing-time p{
+    font-size: 12px;
+    opacity: 0.6;
+}
+.range{
+    width: 100%;
+    margin-top: 20px;
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 6px;
+    background:#f8e9ee; 
+    outline: none;
+}
+.range::-webkit-slider-thumb{
+    -webkit-appearance: none;
+    appearance: none;
+    width: 15px;
+    height: 15px;
+    background:#EDA1B4;
+    cursor: pointer;
+    border-radius: 50%;
+    position: relative;
+}
+.music-player-control{
+    display: flex;
+    justify-content: center;
+    padding-top: 30px;
+    align-items: center;
+    padding-bottom: 134px;
+}
+.play-or-pause i{
+    padding: 30px;
+    background-color: #EFA1B4 ;
+    border-radius: 50%;
+    color: white;
+    margin: 0 30px;
+}
+.playing-btn{
+    padding: 20px;
+    border-radius: 50%;
+    background-color: #FDF6F8;
+    height: 56px;
+    width: 56px;
+    color: #E9A2B3;
+}
+@media (max-height:700px){
+    .music-player-body img{
+        height: 170px;
+        width: 170px;
+    }
+}

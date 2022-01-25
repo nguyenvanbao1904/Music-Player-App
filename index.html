@@ -13,7 +13,7 @@
     <div class="container">
         <div class="content">
             <div class="header">
-                <i class="fas fa-chevron-left"></i>
+                <i class="fas fa-music"></i>
                 Đen - Album
                 <i class="fas fa-bars"></i>
             </div>
@@ -24,11 +24,46 @@
             <div class="footer hiden">
                 <div class="footer-info">
                     <p class="name"></p>
-                    <p>Đen Vâu</p>
+                    <p class="singer"></p>
                 </div>
                 <div class="player">
                     <span><i class="fas fa-pause icon-pause"></i></span>
                     <span><i class="fas fa-play icon-play"></i></span>
+                </div>
+            </div>
+            <div class="music-player-container">
+                <div class="music-player-header">
+                    <i class="fas fa-arrow-left back-btn"></i>
+                    Playing Now
+                    <i class="fas fa-bars"></i>
+                </div>
+                <div class="music-player-body">
+                    <div style="display: flex;
+                    justify-content: center;">
+
+                        <img src="https://i.scdn.co/image/ab67616d00001e0249d5fbb90bd190dc81286c17" alt="" class="music-player-img">
+                    </div>
+                    <div class="music-player-function">
+                        <p class="music-player-name">Mang tiền về cho mẹ</p>
+                        <div class="music-player-info">
+                            <i class="fas fa-redo"></i>
+                            <p class="music-player-singer">Đen Vâu</p>
+                            <i class="fas fa-heart icon-heart"></i>
+                        </div>
+                    </div>
+                    <div class="playing-time">
+                        <p class="playing-time-start">0:00</p>
+                        <p class="playing-time-end">0:00</p>
+                    </div>
+                    <input type="range" id="range" class="range" value="0" min="0" max="100" step="1">
+                    <div class="music-player-control">
+                        <span class="playing-btn btn-back"><i class="fas fa-backward"></i></span>
+                        <div class="play-or-pause">
+                            <span><i class="fas fa-pause icon-pause"></i></span>
+                            <span><i class="fas fa-play icon-play"></i></span>
+                        </div>
+                        <span class="playing-btn btn-next"><i class="fas fa-forward"></i></span>
+                    </div>
                 </div>
             </div>
         </div>
