@@ -100,3 +100,9 @@
 .player.playing span:first-of-type {
     display: inline-block;
   }
+  @media (min-height: 1023px){
+    .footer{
+        position: absolute;
+        bottom: 0px;
+    }
+  }
