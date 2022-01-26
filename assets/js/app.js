@@ -151,11 +151,7 @@ function handelMusicPlayer(){
         playingTimeStart.textContent = formatTime(audio.currentTime)
     }
     setInterval(setTimeStart)
-    // function getTimeEnd(){
-    //     playingTimeEnd.textContent = formatTime(audio.duration)
-    // }
-    // setTimeout(getTimeEnd,5000)
-
+    
     range.onchange = function(e){
         const seekTime = audio.duration/100*e.target.value
         audio.currentTime = seekTime
