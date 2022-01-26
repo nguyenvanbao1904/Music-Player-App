@@ -10,6 +10,7 @@
     width: 100vh;
     max-height: 740px;
     height: calc(100vh - 50px);
+    margin-top: -25px;
     border-radius: 40px;
     background-image: linear-gradient(45deg,rgb(238, 198, 209),rgba(251, 220, 229,0.4));
     position: relative;
