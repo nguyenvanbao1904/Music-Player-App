@@ -205,30 +205,43 @@ function NextOrBack(index){
     const singer = document.querySelector('.singer')
     const player = document.querySelector('.player')
     
+    checkRandom()
     nextBtn.onclick = function(){
-        isPlaying = true
-        if(index < songs.length - 1){
-            index++
-            upadteSong(index)
+        if(!isRandom){
+            isPlaying = true
+            if(index < songs.length - 1){
+                index++
+                upadteSong(index)
+            } else{
+                index = 0
+                upadteSong(index)
+            }
+            currentIndex = index
+            checkPlaying()
         } else{
-            index = 0
-            upadteSong(index)
+            isPlaying = true
+            playRandom()
+            checkPlaying()
         }
-        currentIndex = index
-        checkPlaying()
     }
 
     backBtn.onclick = function(){
-        isPlaying = true
-        if(index > 0){
-            index--
-            upadteSong(index)
+        if(!isRandom){
+            isPlaying = true
+            if(index > 0){
+                index--
+                upadteSong(index)
+            } else{
+                index = songs.length - 1
+                upadteSong(index)
+            }
+            currentIndex = index
+            checkPlaying()
         } else{
-            index = songs.length - 1
-            upadteSong(index)
+            isPlaying = true
+            playRandom()
+            checkPlaying()
         }
-        currentIndex = index
-        checkPlaying()
     }
 }
 
