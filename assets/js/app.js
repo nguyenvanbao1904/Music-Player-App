@@ -10,6 +10,9 @@ const cdThumb = document.querySelector('.music-player-img')
     })
 
 var isPlaying = false
+var isLoop = false
+var isRandom = false
+var currentIndex
 
 
 function start(){
@@ -55,32 +58,45 @@ function renderSongs(){
     playList.innerHTML = htmls.join('')
 }
 
-function clickSong(){
+function upadteSong(index){
+    const playingImg = document.querySelector('.music-player-img')
+    const playingName = document.querySelector('.music-player-name')
+    const playingSinger = document.querySelector('.music-player-singer')
+
     const footer = document.querySelector('.footer')
     const songItem = document.querySelectorAll('.song-item')
     const name = document.querySelector('.name')
     const singer = document.querySelector('.singer')
     const player = document.querySelector('.player')
+    const playingTimeEnd = document.querySelector('.playing-time-end')
 
-    const playingImg = document.querySelector('.music-player-img')
-    const playingName = document.querySelector('.music-player-name')
-    const playingSinger = document.querySelector('.music-player-singer')
+    audio.src = songs[index].src
+    playingImg.src=songs[index].img
+    playingName.textContent = songs[index].name
+    playingSinger.textContent = songs[index].singer
+    audio.play()
+
+    player.classList.add('playing')
+    name.textContent = songs[index].name
+    singer.textContent = songs[index].singer
+    playingTimeEnd.textContent = songs[index].time
+
+}
+
+function clickSong(){
+    const footer = document.querySelector('.footer')
+    const songItem = document.querySelectorAll('.song-item')
     
     songItem.forEach(function(song,index){
         song.onclick = function(){
-            player.classList.add('playing')
-            name.textContent = songs[index].name
-            singer.textContent = songs[index].singer
-            audio.src= songs[index].src
-
-            playingImg.src=songs[index].img
-            playingName.textContent = songs[index].name
-            playingSinger.textContent = songs[index].singer
-            
+            upadteSong(index)
             //run
             footer.classList.remove("hiden")
             isPlaying = true
             audio.play()
+            NextOrBack(index)
+            handelMusicEnd(index)
+            currentIndex = index
         }
     })
 }
@@ -130,16 +146,15 @@ function handelMusicPlayer(){
     const btns = document.querySelectorAll('.play-or-pause span')
     const backBtn = document.querySelector('.back-btn')
     const musicPlayer = document.querySelector('.music-player-container')
-    const iconHeart = document.querySelector('.icon-heart')
 
     function setTimeStart(){
         playingTimeStart.textContent = formatTime(audio.currentTime)
     }
     setInterval(setTimeStart)
-    function getTimeEnd(){
-        playingTimeEnd.textContent = formatTime(audio.duration)
-    }
-    setTimeout(getTimeEnd,3000)
+    // function getTimeEnd(){
+    //     playingTimeEnd.textContent = formatTime(audio.duration)
+    // }
+    // setTimeout(getTimeEnd,5000)
 
     range.onchange = function(e){
         const seekTime = audio.duration/100*e.target.value
@@ -166,9 +181,6 @@ function handelMusicPlayer(){
     backBtn.onclick = function(){
         musicPlayer.classList.remove('show')
     }
-    iconHeart.onclick = function(){
-        iconHeart.classList.toggle('active')
-    }
 }
 
 function checkPlaying(){
@@ -178,4 +190,101 @@ function checkPlaying(){
     } else{
         player.classList.remove('playing')
     }
+}
+
+function NextOrBack(index){
+    const nextBtn = document.querySelector('.btn-next')
+    const backBtn = document.querySelector('.btn-back')
+    const playingImg = document.querySelector('.music-player-img')
+    const playingName = document.querySelector('.music-player-name')
+    const playingSinger = document.querySelector('.music-player-singer')
+
+    const footer = document.querySelector('.footer')
+    const songItem = document.querySelectorAll('.song-item')
+    const name = document.querySelector('.name')
+    const singer = document.querySelector('.singer')
+    const player = document.querySelector('.player')
+    
+    nextBtn.onclick = function(){
+        isPlaying = true
+        if(index < songs.length - 1){
+            index++
+            upadteSong(index)
+        } else{
+            index = 0
+            upadteSong(index)
+        }
+        currentIndex = index
+        checkPlaying()
+    }
+
+    backBtn.onclick = function(){
+        isPlaying = true
+        if(index > 0){
+            index--
+            upadteSong(index)
+        } else{
+            index = songs.length - 1
+            upadteSong(index)
+        }
+        currentIndex = index
+        checkPlaying()
+    }
+}
+
+function handelMusicEnd(index){
+    checkLoop()
+    checkRandom()
+    audio.onended = function(){
+        if(!isLoop){
+            if(isRandom){
+                playRandom()
+            } else{
+                if(index < songs.length -1){
+                    index++
+                    upadteSong(index)
+                } else{
+                    index = 0
+                    upadteSong(index)
+                }
+            }
+        } else{
+            audio.play()
+        }
+    }
+}
+
+function checkLoop(){
+    const loopIcon = document.querySelector('.icon-loop')
+
+    loopIcon.onclick = function(){
+        loopIcon.classList.toggle('active')
+        if(loopIcon.classList.contains('active')){
+            isLoop = true
+        } else{
+            isLoop = false
+        }
+    }
+}
+
+function checkRandom(){
+    const randomIcon = document.querySelector('.random-icon')
+
+    randomIcon.onclick = function(){
+        randomIcon.classList.toggle('active')
+        if(randomIcon.classList.contains('active')){
+            isRandom = true
+        } else{
+            isRandom = false
+        }
+    }
+}
+
+function playRandom(){
+    checkRandom()
+    let newIndex
+    do{
+        newIndex = Math.floor(Math.random()*songs.length)
+    } while(currentIndex===newIndex)
+    upadteSong(newIndex)
 }

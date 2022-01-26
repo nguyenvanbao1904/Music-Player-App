@@ -166,7 +166,7 @@
     font-weight: 500;
     opacity: 0.7;
 }
-.icon-heart.active{
+.active{
     color: red;
 }
 .playing-time{
